@@ -3,8 +3,8 @@ import { prisma } from "../db";
 
 builder.prismaObject("Project", {
   fields: (t) => ({
-    projectID: t.exposeID("projectID"),
-    projectName: t.exposeString("projectName"),
+    id: t.exposeID("id"),
+    name: t.exposeString("name"),
     description: t.exposeString("description"),
     startDate: t.expose("startDate", {
       type: "Date",
@@ -13,7 +13,8 @@ builder.prismaObject("Project", {
       type: "Date",
       nullable: true,
     }),
-    status: t.exposeString("projectName"),
+    statusId: t.exposeInt("statusId"),
+    status: t.relation("status"),
     images: t.relation("images"),
     technologies: t.relation("technologies"),
   }),

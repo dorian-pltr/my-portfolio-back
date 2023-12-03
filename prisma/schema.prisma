@@ -15,25 +15,42 @@ datasource db {
 }
 
 model Project {
-  projectID    Int          @id @default(autoincrement())
-  projectName  String       @unique
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
   description  String
   startDate    DateTime
   endDate      DateTime?
-  status       String
+  statusId     Int
+  status       ProjectStatus @relation(fields: [statusId], references: [id])
   images       Image[]
   technologies Technology[]
 }
 
+model ProjectStatus {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  projects Project[]
+}
+
 model Technology {
-  technologyID   Int       @id @default(autoincrement())
-  technologyName String    @unique
-  projects       Project[]
+  id       Int            @id @default(autoincrement())
+  name     String         @unique
+  isMain   Boolean
+  typeId   Int
+  type     TechnologyType @relation(fields: [typeId], references: [id])
+  projects Project[]
+}
+
+model TechnologyType {
+  id           Int          @id @default(autoincrement())
+  name         String       @unique
+  technologies Technology[]
 }
 
 model Image {
-  imageID   Int     @id @default(autoincrement())
-  projectID Int
-  imagePath String
-  project   Project @relation(fields: [projectID], references: [projectID])
+  id        Int     @id @default(autoincrement())
+  url       String
+  isMain    Boolean
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
 }
