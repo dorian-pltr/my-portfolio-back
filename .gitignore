@@ -5,6 +5,7 @@ build/
 
 # Files
 *.log
-*.json
+package.json
+package-lock.json
 *.lock
 *.env
