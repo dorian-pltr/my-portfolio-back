@@ -17,6 +17,7 @@ builder.prismaObject("Project", {
     status: t.relation("status"),
     images: t.relation("images"),
     technologies: t.relation("technologies"),
+    url: t.exposeString("url", { nullable: true }),
   }),
 });
 

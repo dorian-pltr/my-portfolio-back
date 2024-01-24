@@ -24,6 +24,7 @@ model Project {
   status       ProjectStatus @relation(fields: [statusId], references: [id])
   images       Image[]
   technologies Technology[]
+  url          String?
 }
 
 model ProjectStatus {
